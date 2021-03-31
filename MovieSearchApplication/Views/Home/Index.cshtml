@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<div class="text-center">
+    <h1 class="display-4">search movie here</h1>
+    <input type="text" placeholder="Search..." name="search" id="searchval" autocomplete="off"/>
+    <button type="button" id="btnsubmit" title="click here to search movie"><i class="fa fa-search"></i></button>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#btnsubmit').click(function (event) {
+                debugger;
+                var searchkey = $("#searchval").val();
+                var urlval = "https://api.themoviedb.org/3/search/movie?api_key=a7ed7320ba9b3af58ca5b6b1d6785cf8&language=en-US&page=1&include_adult=false";
+                $.ajax({
+                    type: "GET",
+                    url: urlval + "&query=" + searchkey,
+                    dataType: "json",
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (data) {
+                        //alert("Success.")
+                        alert(JSON.stringify(data.results[0]));
+                        console.log(data);
+                    },
+                    error: function () {
+                        alert("Error occured.")
+                    }
+                });
+
+            });
+        });
+    });
+</script>
